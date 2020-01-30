@@ -1,0 +1,52 @@
+{% extends 'base_board.html' %}
+
+{% block board %}
+    <h1>{{ board.title }}</h1>
+    <div class="container">
+      <a href="{% url 'board:task_create' board_pk=board.pk %}" class="btn btn-primary" type="button">CREATE NEW TASK</a>
+      <div class="row">
+        <div class="col-sm">
+          <h3>TO DO</h3>
+            {% for task in todo_list %}
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.text }}</p>
+                    <a href="{% url 'board:task_delete' pk=task.pk %}" class="btn btn-danger">DELETE</a>
+                    <a href="{% url 'board:task_move' pk=task.pk %}" class="btn btn-primary">MOVE</a>
+                      <a href="{% url 'board:task_edit' pk=task.pk %}" class="btn btn-success">EDIT</a>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+          <h3>In progress</h3>
+            {% for task in in_progress_list %}
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.text }}</p>
+                    <a href="{% url 'board:task_delete' pk=task.pk %}" class="btn btn-danger">DELETE</a>
+                    <a href="{% url 'board:task_move' pk=task.pk %}" class="btn btn-primary">MOVE</a>
+                      <a href="{% url 'board:task_edit' pk=task.pk %}" class="btn btn-success">EDIT</a>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+          <h3>Done</h3>
+            {% for task in done_list %}
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.text }}</p>
+                    <a href="{% url 'board:task_delete' pk=task.pk %}" class="btn btn-danger">DELETE</a>
+                    <a href="{% url 'board:task_move' pk=task.pk %}" class="btn btn-primary">MOVE</a>
+                      <a href="{% url 'board:task_edit' pk=task.pk %}" class="btn btn-success">EDIT</a>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

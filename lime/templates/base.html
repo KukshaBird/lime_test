@@ -24,6 +24,11 @@
                         <a class="btn btn-warning justify-content-end" href="{% url 'logout' %}">Logout</a>
                     </div>
                 </div>
+                <div>
+                    {% for board in user.boards.all %}
+                    <a href="{% url 'board:board_detail' pk=board.pk %}">{{ board }}</a>
+                    {% endfor %}
+                </div>
             {% else %}
                 <a href="{% url 'login' %}">
                     <button type="button" class="btn btn-primary">Sign In</button>
