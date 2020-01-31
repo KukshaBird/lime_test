@@ -1,4 +1,4 @@
-<form method="post">{% csrf_token %}
+<form method="POST">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     <input class="btn btn-danger" type="submit" value="DELETE">
     <a href="{% url 'board:board_detail' pk=object.board.pk %}" type="button" class="btn btn-success">BACK</a>

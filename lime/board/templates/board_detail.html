@@ -1,6 +1,6 @@
-{% extends 'base_board.html' %}
+{% extends 'base.html' %}
 
-{% block board %}
+{% block content_block %}
     <h1>{{ board.title }}</h1>
     <div class="container">
       <a href="{% url 'board:task_create' board_pk=board.pk %}" class="btn btn-primary" type="button">CREATE NEW TASK</a>
