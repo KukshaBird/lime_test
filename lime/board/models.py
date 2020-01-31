@@ -4,16 +4,19 @@ from django.shortcuts import reverse
 
 User = get_user_model()
 
+
 class Board(models.Model):
     title = models.CharField(max_length=255, null=True)
     create_time = models.DateTimeField(auto_now_add=True)
-    users = models.ManyToManyField(User, related_name='boards')
+    users = models.ManyToManyField(User, related_name='boards', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('board:board_detail', kwargs={'pk': self.id})
+
 
 class Task(models.Model):
 

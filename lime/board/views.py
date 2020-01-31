@@ -3,20 +3,17 @@ from django.urls import reverse_lazy
 from django.views.generic import (DetailView, ListView,
                                   CreateView, DeleteView,
                                   UpdateView)
-#  Methods allowed
-#  forms
-
 #  Models
 from .models import Board, Task
-# Create your views here.
 
 
 class BoardListView(ListView):
     model = Board
     template_name = 'base_board.html'
+    http_method_names = ['get']
 
     def get_queryset(self):
-        qs = self.request.user.boards.all().order_by('-create_time')
+        qs = self.request.user.boards.filter(is_active=True).order_by('-create_time')
         return qs
 
 
@@ -24,14 +21,11 @@ class BoardCreateView(CreateView):
     model = Board
     fields = ['title']
     template_name = 'task_create.html'
-    # success_url = 'board_list'
 
     def form_valid(self, form):
         form.save()
         form.instance.users.set([self.request.user])
-        form.save()
         return super().form_valid(form)
-
 
 
 class BoardDetailView(DetailView):
@@ -40,6 +34,9 @@ class BoardDetailView(DetailView):
     http_method_names = ['get']
 
     def get_context_data(self, **kwargs):
+        """
+        Create QS's for each column to avoid multiple fetching in the template.
+        """
         context = super().get_context_data(**kwargs)
         context['todo_list'] = Task.objects.filter(status='TD', board=self.object).order_by('-update_time')
         context['in_progress_list'] = Task.objects.filter(status='PR', board=self.object).order_by('-update_time')
