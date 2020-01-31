@@ -1,6 +1,7 @@
 from django.test import TestCase
 from board.models import Board, Task
 
+
 class BoardTestCase(TestCase):
     def setUp(self):
         Board.objects.create(id=1, title='Test Board')
