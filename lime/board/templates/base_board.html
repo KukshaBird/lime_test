@@ -4,7 +4,7 @@
     {% if user.is_authenticated %}
         <div>
             {% for board in board_list %}
-            <a href="{% url 'board:board_detail' pk=board.pk %}"><h2>{{ board|upper }}</h2></a>
+            <a href="{% url 'board:board_detail' pk=board.pk %}"><h2>{{ board|upper|safe }}</h2></a>
             {% endfor %}
         </div>
     {% endif %}

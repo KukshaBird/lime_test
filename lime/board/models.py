@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
+from django.utils.safestring import mark_safe
 
 User = get_user_model()
 
@@ -11,6 +12,7 @@ class Board(models.Model):
     users = models.ManyToManyField(User, related_name='boards', blank=True)
     is_active = models.BooleanField(default=True)
 
+    @mark_safe
     def __str__(self):
         return self.title
 
@@ -33,5 +35,6 @@ class Task(models.Model):
     update_time = models.DateTimeField(auto_now=True, null=True)
     board = models.ForeignKey(Board, related_name='tasks', null=True, on_delete=models.CASCADE)
 
+    @mark_safe
     def __str__(self):
         return self.title
