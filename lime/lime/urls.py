@@ -24,4 +24,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('login/', views.UserLoginView.as_view(), name='login'),
     path('board/', include('board.urls')),
+    path('api/', include('board.api.urls')),
 ]
