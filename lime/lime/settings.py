@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'crispy_forms',
     'board',
 ]
@@ -134,4 +136,4 @@ SECURE_BROWSER_XSS_FILTER = env('SECURE_BROWSER_XSS_FILTER')
 SECURE_CONTENT_TYPE_NOSNIFF = env('SECURE_CONTENT_TYPE_NOSNIFF')
 SECURE_FRAME_DENY = env('SECURE_FRAME_DENY')
 
-from board.api.restconf.main import *
+from board.api.restconf import *

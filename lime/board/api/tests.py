@@ -11,7 +11,7 @@ class BoardAPITestCase(APITestCase):
     def setUp(self):
         User.objects.create(username='testuser', 
                             password='1245',
-                            password2='1245')
+                            )
 
     # def test_board_create_properly_url(self):
     #     """Board object creates a properly URL when generic view executes success_url method."""
@@ -27,12 +27,12 @@ class BoardAPITestCase(APITestCase):
         data = {
             'title': 'new board'
         }
-        url = api_reverse('api:board:create')
+        url = api_reverse('rest:board')
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Board.objects.count(), 1)
         data_id = response.get('id')
-        rud_url = api_reverse('api:board_detail')
+        rud_url = api_reverse('rest:board')
         rud_data = {
             'title': 'another new board'
         }

@@ -3,21 +3,21 @@ from rest_framework import serializers
 from board.models import Board, Task
 
 class BoardSerializer(serializers.ModelSerializer):
-	tasks = serializers.HyperlinkRelatedField(
-									sourse='tasks',
-									view_name='rest:task_detail',
-									read_only=True,
-									many=True
-								)
+	# tasks = serializers.HyperlinkedRelatedField(
+	# 								view_name='rest:task_detail',
+	# 								read_only=True,
+	# 								many=True
+	# 							)
 
 	class Meta:
 		model = Board
 		fields = [
+			'id',
 			'users',
 			'title',
 			'tasks',
 		]
-		read_only_fields = ['users']
+		read_only_fields = ['users', 'tasks']
 
 
 
@@ -28,5 +28,5 @@ class TaskSerializer(serializers.ModelSerializer):
 		fields = [
 			'board',
 			'title',
-			'message',
+			'text',
 		]
