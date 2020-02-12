@@ -3,11 +3,12 @@ from rest_framework import serializers
 from board.models import Board, Task
 
 class BoardSerializer(serializers.ModelSerializer):
-	# tasks = serializers.HyperlinkedRelatedField(
-	# 								view_name='rest:task_detail',
-	# 								read_only=True,
-	# 								many=True
-	# 							)
+
+	tasks = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='board-api:task_detail'
+    )
 
 	class Meta:
 		model = Board
@@ -26,7 +27,9 @@ class TaskSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Task
 		fields = [
+			'id',
 			'board',
 			'title',
 			'text',
+			'status',
 		]
