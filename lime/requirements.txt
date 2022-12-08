@@ -1,5 +1,5 @@
 attrs==19.3.0
-certifi==2019.11.28
+certifi==2022.12.7
 Django==2.2.10
 django-crispy-forms==1.8.1
 django-environ==0.4.5
